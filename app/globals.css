@@ -2,26 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.gradient-01 {
+  position: absolute;
+  width: 404px;
+  height: 800px;
+  left: 20%;
+  top: 5%;
+
+  background: rgba(82, 110, 235, 0.35);
+  filter: blur(175px);
+  transform: rotate(-114.2deg);
+}
+
+.gradient-02 {
+  position: absolute;
+  width: 304px;
+  height: 100vh;
+  right: 20%;
+  bottom: 0%;
+
+  background: rgba(52, 45, 152, 0.75);
+  filter: blur(200px);
+  transform: rotate(-53.13deg);
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 0;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Tailwind Styles */
+
+.app {
+  @apply relative z-10 flex justify-center items-center flex-col max-w-screen-2xl mx-auto pb-16;
+}
+
+.btnNav {
+  @apply flex flex-col items-center cursor-pointer hover:text-slate-400;
+}
+
+.btn {
+  @apply bg-blue-500 w-full py-2 rounded font-bold;
+}
+
+.p-text {
+  color: #a3adbd;
 }
