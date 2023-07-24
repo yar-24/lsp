@@ -15,7 +15,7 @@ const ListMading = () => {
 
   return (
     <div className="relative my-7 grid grid-flow-cols-2 gap-4 md:grid-cols-3 place-content-evenly">
-      {madings.map((mading) => (
+      {madings?.map((mading) => (
         <CardMading
           key={mading._id}
           id={mading._id}

@@ -9,6 +9,24 @@ const initialState = {
   message: '',
 };
 
+// Register comment
+export const createComment = createAsyncThunk(
+  'comment/create',
+  async (data, thunkAPI) => {
+    try {
+      return await commentService.createComment(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Get comment
 export const getAllComment = createAsyncThunk(
   'comment/getAll',
@@ -35,6 +53,20 @@ export const commentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(createComment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.comment = action.payload;
+      })
+      .addCase(createComment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.comment = null;
+      })
       .addCase(getAllComment.pending, (state) => {
         state.isLoading = true;
       })

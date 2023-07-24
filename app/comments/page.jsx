@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Comments = () => {
   const { comment } = useSelector((state) => state.comment);
-  const { user } = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 

@@ -42,6 +42,7 @@ export const deleteComment = async (id, token) => {
 
 const commentService = {
   getAllComment,
+  createComment,
 };
 
 export default commentService;

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MadingDetail = () => {
-  const [komentar, setKomentar] = useState('');
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [idMading, setIdMading] = useState('');
 
@@ -17,7 +17,7 @@ const MadingDetail = () => {
   const dispacth = useDispatch();
 
   const { mading } = useSelector((state) => state.mading.mading);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user?.user);
 
   const filterComment = comments
     ? comments.filter((comment) => comment.idMading === id)
@@ -35,15 +35,19 @@ const MadingDetail = () => {
     e.preventDefault();
 
     const data = {
-      komentar,
+      comment,
       idMading,
     };
 
     if (user) {
-      const response = await createComment(data, user.token);
-      if (response.comment) {
+      const response = await createComment(data, user.token).then(
+        (response) => {
+          console.log(response);
+        }
+      );
+      if (response) {
         alert(response.message);
-        setKomentar('');
+        setComment('');
       }
     } else {
       alert('login dulu yak!!');
@@ -79,14 +83,14 @@ const MadingDetail = () => {
             className="text- p-2 bg-slate-700 "
             type="text"
             placeholder="Isi sesuatu"
-            value={komentar}
-            onChange={(e) => setKomentar(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             required
           />
         </div>
         <button className="btn">Submit</button>
         <div className="flex flex-col items-center relative overflow-y-scroll h-[300px]">
-          {filterComment.map((comment) => (
+          {filterComment?.map((comment) => (
             <div className="flex flex-col border-gray-400 border rounded p-3 md:w-[80%] mt-5">
               <div className="flex justify-between">
                 <h3 className="text-lg font-bold">{comment.username}</h3>
