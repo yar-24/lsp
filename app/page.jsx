@@ -1,7 +1,7 @@
 'use client';
 import ListCategory from '@/components/ListCategory';
 import ListMading from '@/components/ListMading';
-import Banner from '@/components/banner';
+import Banner from '@/components/Banner';
 
 export default function Home() {
   return (
